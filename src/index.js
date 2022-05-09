@@ -55,7 +55,11 @@ class Scripts {
   }
 
   execute(command) {
-    execSync(command, { stdio: 'inherit' });
+    const separatorIdx = process.argv.indexOf('--');
+    if (separatorIdx > -1) {
+      command += ' ' + process.argv.slice(separatorIdx+1).join(' ');
+    }
+    execSync(command,  { stdio: 'inherit' });
   }
 }
 
